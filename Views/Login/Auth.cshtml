@@ -1,0 +1,17 @@
+@model mvc_api.Views.Login.LoginViewModel;
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Auth", "Login", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Telefone, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control", maxlength = 11, minLength=11 })
+        @Html.ValidationMessageFor(m => m.Telefone, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Entrar</button>
+}
