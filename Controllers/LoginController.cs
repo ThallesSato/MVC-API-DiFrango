@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using mvc_api.Database;
 using mvc_api.Models;
-using mvc_api.Views.Login;
+using mvc_api.ViewModel.Login;
 
 namespace mvc_api.Controllers;
 
@@ -23,33 +23,80 @@ public class LoginController : Controller
     }
     
     [HttpPost]
-    public IActionResult Auth(LoginViewModel model)
+    public IActionResult Auth(AuthViewModel model)
     {
-        if (ModelState.IsValid)
-        {
-            if (_context.Clientes.Any(c => c.Telefone == model.Telefone))
-            {
-                var cliente = _context.Clientes
-                    .FirstOrDefault(c => c.Telefone == model.Telefone);
-                return RedirectToAction("Login", "Login", cliente);
-            }
-            else
-            {
-                return RedirectToAction("Register", "Login", model);
-            } 
-        }
+        if (!ModelState.IsValid) return View(model);
+        
+        var cliente = _context.Clientes
+            .FirstOrDefault(c => c.Telefone == model.Telefone);
+        
+        if (cliente == null) return RedirectToAction("Register", "Login",model);
 
+        TempData["Telefone"] = cliente.Telefone;
+        TempData["Nome"] = cliente.FullName.Split(" ")[0];
+        return RedirectToAction("Login", "Login");
+    }
+    
+    [HttpGet]
+    public IActionResult Login()
+    { 
+        LoginViewModel login = new LoginViewModel();
+        
+        login.Telefone = TempData["Telefone"].ToString();
+        login.Nome = TempData["Nome"].ToString();
+    
+        return View(login);
+    }
+    
+    [HttpPost]
+    public IActionResult Login(LoginViewModel model)
+    { 
+        if (!ModelState.IsValid) return View(model);
+        
+        var cliente = _context.Clientes
+            .FirstOrDefault(c => c.Telefone == model.Telefone);
+
+        if (!BCrypt.Net.BCrypt.Verify(model.Password, cliente.PasswordHash))
+        {
+            ModelState.AddModelError(string.Empty, "Senha inválida");
+            return View(model);
+        }
+        TempData["Success"] = "Logado com sucesso!";
         return View(model);
     }
 
-    public IActionResult Login(Cliente cliente)
+    [HttpGet]
+    public IActionResult Register(AuthViewModel model)
     {
-        return View();
+        RegisterViewModel register = new RegisterViewModel();
+        register.Telefone = model.Telefone;
+        return View(register);
     }
 
-    public IActionResult Register(LoginViewModel model)
-    {
-        return View();
+    [HttpPost]
+    public IActionResult Register(RegisterViewModel model)
+    { 
+        if (!ModelState.IsValid) return View(model);
+        
+        try
+        {
+            var cliente = new Cliente
+            {
+                FullName = model.FullName,
+                Telefone = model.Telefone,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password)
+            };
+
+            _context.Clientes.Add(cliente);
+            _context.SaveChanges();
+            
+            TempData["Success"] = "Registro concluído com sucesso!";
+            return View(model);
+        } 
+        catch (Exception ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            return View(model);
+        }
     }
-    
 }

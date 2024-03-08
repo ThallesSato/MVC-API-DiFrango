@@ -1,5 +1,36 @@
+@model mvc_api.ViewModel.Login.LoginViewModel
 @{
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+<h2>Entrar</h2>
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Telefone, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control", @readonly = "readonly" })<br/>
+        
+        @Html.LabelFor(m => m.Nome, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @readonly = "readonly" }) <br/>
+        
+        @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" }) <br/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Entrar</button>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+    
+    <script>
+    setTimeout(function() {
+        window.location.href = "@Url.Action("Index", "Home")";
+    }, 3000);
+    </script>
+}

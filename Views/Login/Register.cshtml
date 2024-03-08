@@ -1,5 +1,42 @@
+@model mvc_api.ViewModel.Login.RegisterViewModel
 @{
     ViewBag.Title = "Register";
 }
 
-<h2>Register</h2>
+<h2>Registrar</h2>
+
+@using (Html.BeginForm("Register", "Login", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Telefone, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control", @readonly = "readonly" })
+        @Html.ValidationMessageFor(m => m.Telefone, "", new { @class = "text-danger" })<br/> 
+        
+        @Html.Label( Model.FullName, "Nome Completo",new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })<br/>
+        
+        @Html.Label( Model.ConfirmPassword,"Senha", new { @class = "control-label" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "Password", minLength = 6})
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })<br/>
+        
+        @Html.Label( Model.ConfirmPassword,"Confirmar senha", new { @class = "control-label" })
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", id = "ConfirmPassword", minLength = 6})
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })<br/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrar</button>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+    
+    <script>
+    setTimeout(function() {
+        window.location.href = "@Url.Action("Index", "Home")";
+    }, 3000);
+    </script>
+}

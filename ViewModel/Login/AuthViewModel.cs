@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace mvc_api.Views.Login;
+namespace mvc_api.ViewModel.Login;
 
-public class LoginViewModel
+public class AuthViewModel
 {
-    [Required]
+    [Required(ErrorMessage = "Insira seu telefone")]
     [Display(Name = "Telefone")]
     [Length(11,11,ErrorMessage = "Número de telefone inválido")]
     public string Telefone { get; set; }
