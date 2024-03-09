@@ -15,9 +15,12 @@
         @Html.LabelFor(m => m.Nome, new { @class = "control-label" })
         @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @readonly = "readonly" }) <br/>
         
-        @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+        @Html.LabelFor( m => m.Password,"Senha", new { @class = "control-label" })
         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" }) <br/>
+        
+        @Html.LabelFor(m => m.RememberMe, "Manter conectado", new { @class = "form-check-label" })
+        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" }) <br/><br/>
     </div>
 
     <button type="submit" class="btn btn-primary">Entrar</button>

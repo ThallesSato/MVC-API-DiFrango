@@ -4,3 +4,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Bem vindo.</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <span>Olá, @User.Identity.Name!</span>
+}
