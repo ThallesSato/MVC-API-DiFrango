@@ -1,0 +1,38 @@
+@model mvc_api.ViewModel.Account.ClienteViewModel;
+
+@{
+    ViewBag.Title = "Minha Conta";
+}
+
+<h2>Minha Conta</h2>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Telefone, new { @class = "control-label" })
+    @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })<br/>
+    
+    @Html.LabelFor(m => m.FullName,"Nome Completo", new { @class = "control-label" })
+    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })<br/>
+    
+    @Html.LabelFor(m => m.Enderecos,"Endereços", new { @class = "control-label" })<br/>
+    @if (Model.Enderecos.Count == 0)
+    {
+        <span> Você ainda não possui endereços cadastrados! </span>
+    }
+    else
+    {
+        foreach(Endereco endereco in Model.Enderecos)
+        {
+            @Html.Label(endereco.Rua,"Rua", new { @class = "control-label" })
+            @Html.TextBox(endereco.Rua, endereco.Rua, new { @class = "form-control" })<br/>
+            
+            @Html.Label(endereco.Numero,"Numero", new { @class = "control-label" })
+            @Html.TextBox(endereco.Numero, endereco.Numero, new { @class = "form-control" })<br/>
+            
+            @Html.Label(endereco.Complemento,"Complemento", new { @class = "control-label" })
+            @Html.TextBox(endereco.Complemento, endereco.Complemento, new { @class = "form-control" })<br/>
+            
+            @Html.Label(endereco.Cep,"Cep", new { @class = "control-label" })
+            @Html.TextBox(endereco.Cep, endereco.Cep, new { @class = "form-control" })<br/>
+        }
+    }
+</div>

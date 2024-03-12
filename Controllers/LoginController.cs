@@ -10,13 +10,11 @@ namespace mvc_api.Controllers;
 
 public class LoginController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
 
     private readonly AppDbContext _context;
 
-    public LoginController(ILogger<HomeController> logger, AppDbContext context)
+    public LoginController(AppDbContext context)
     {
-        _logger = logger;
         _context = context;
     }
     [HttpGet]
@@ -143,7 +141,8 @@ public class LoginController : Controller
             var claims = new List<Claim>
             {
                 // Adiciona um claim para o cookie com o nome do Cliente
-                new Claim(ClaimTypes.Name, cliente.FullName.Split(" ")[0])
+                new Claim(ClaimTypes.Name, cliente.FullName.Split(" ")[0]),
+                new Claim(ClaimTypes.MobilePhone, cliente.Telefone)
             };
 
             // Cria uma identidade de claims com as informações do usuário

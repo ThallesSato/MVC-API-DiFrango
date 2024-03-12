@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Login/LoginUsuario/"; 
+        options.LoginPath = "/Login/Auth/"; 
         options.Cookie.HttpOnly = true;  // Bloquear acesso pelo JS
         options.Cookie.SecurePolicy = CookieSecurePolicy.Always;  // Apenas enviar via HTTPS
         options.Cookie.SameSite = SameSiteMode.Strict;  // Limitar a origem do cookie para o mesmo site
