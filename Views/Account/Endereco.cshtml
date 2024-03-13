@@ -1,0 +1,50 @@
+@model mvc_api.ViewModel.Account.EnderecoViewModel;
+
+@if(TempData["Exists"]!=null)
+{
+    ViewBag.Title = "Editar Endereço";
+    <h2>Editar Endereço</h2>
+}
+else
+{
+    ViewBag.Title = "Novo Endereço";
+    <h2>Novo Endereço</h2>
+}
+
+
+@using (Html.BeginForm("Endereco", "Account", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rua, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Rua, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Rua, "", new { @class = "text-danger" }) <br/>
+
+        @Html.LabelFor(m => m.Numero, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Numero, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Numero, "", new { @class = "text-danger" }) <br/>
+
+        @Html.LabelFor(m => m.Complemento, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Complemento, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Complemento, "", new { @class = "text-danger" }) <br/>
+
+        @Html.LabelFor(m => m.Cep, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Cep, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Cep, "", new { @class = "text-danger" }) <br/>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Entrar</button>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+    
+    <script>
+    setTimeout(function() {
+        window.location.href = "@Url.Action("MinhaConta", "Account")";
+    }, 1500);
+    </script>
+}
