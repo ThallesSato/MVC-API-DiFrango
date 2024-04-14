@@ -1,0 +1,17 @@
+@model mvc_api.ViewModel.Account.EditClienteViewModel;
+
+@{
+    ViewBag.Title = "Editar Conta";
+}
+<h2>Editar Conta</h2>
+
+
+@using (Html.BeginForm("Endereco", "Account", FormMethod.Post))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger", id = "summary", name = "summary" })
+    
+    @Html.LabelFor(m => m.FullName,"Nome Completo", new { @class = "control-label" })
+    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })<br/>
+    @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })<br/>
+    
+} // Todo

@@ -14,23 +14,31 @@ else
 
 @using (Html.BeginForm("Endereco", "Account", FormMethod.Post))
 {
-    @Html.ValidationSummary()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger", id = "summary", name = "summary" })
     <div class="form-group">
+        @Html.LabelFor(m => m.Cep, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Cep, new { @class = "form-control", id="cep", name="cep", maxlength="9",onblur="pesquisacep(this.value)" })
+        @Html.ValidationMessageFor(m => m.Cep, "", new { @class = "text-danger" }) <br/>
+        
         @Html.LabelFor(m => m.Rua, new { @class = "control-label" })
-        @Html.TextBoxFor(m => m.Rua, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Rua, new { @class = "form-control", id="rua", name="rua" })
         @Html.ValidationMessageFor(m => m.Rua, "", new { @class = "text-danger" }) <br/>
 
         @Html.LabelFor(m => m.Numero, new { @class = "control-label" })
         @Html.TextBoxFor(m => m.Numero, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Numero, "", new { @class = "text-danger" }) <br/>
 
-        @Html.LabelFor(m => m.Complemento, new { @class = "control-label" })
-        @Html.TextBoxFor(m => m.Complemento, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Complemento,"Complemento (Casa, Ap, Bloco, ...)", new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Complemento, new { @class = "form-control", maxlength=15 })
         @Html.ValidationMessageFor(m => m.Complemento, "", new { @class = "text-danger" }) <br/>
-
-        @Html.LabelFor(m => m.Cep, new { @class = "control-label" })
-        @Html.TextBoxFor(m => m.Cep, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Cep, "", new { @class = "text-danger" }) <br/>
+        
+        @Html.LabelFor(m => m.Bairro, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Bairro, new { @class = "form-control", id="bairro", name="bairro" })
+        @Html.ValidationMessageFor(m => m.Bairro, "", new { @class = "text-danger" }) <br/>
+        
+        @Html.LabelFor(m => m.Cidade, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Cidade, new { @class = "form-control", id="cidade", name="cidade" })
+        @Html.ValidationMessageFor(m => m.Cidade, "", new { @class = "text-danger" }) <br/>
     </div>
     
     <button type="submit" class="btn btn-primary">Entrar</button>
@@ -48,3 +56,72 @@ else
     }, 1500);
     </script>
 }
+
+    <script>
+    
+    function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('rua').value=("");
+            document.getElementById('bairro').value=("");
+            document.getElementById('cidade').value=("");
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('rua').value=(conteudo.logradouro);
+            document.getElementById('bairro').value=(conteudo.bairro);
+            document.getElementById('cidade').value=(conteudo.localidade);
+            document.getElementById('rua').readOnly = true;
+            document.getElementById('bairro').readOnly = true;
+            document.getElementById('cidade').readOnly = true;
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('rua').value="...";
+                document.getElementById('bairro').value="...";
+                document.getElementById('cidade').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    }
+
+    </script>

@@ -11,8 +11,8 @@ using mvc_api.Database;
 namespace mvc_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240313045558_endereconotworking")]
-    partial class endereconotworking
+    [Migration("20240326020938_Endereco add")]
+    partial class Enderecoadd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,7 +65,13 @@ namespace mvc_api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Bairro")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Cep")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Cidade")
                         .HasColumnType("longtext");
 
                     b.Property<int?>("ClienteId")

@@ -9,12 +9,7 @@ public class Cliente
     public int Id { get; set; }
     public string? FullName { get; set; }
     public string? Telefone { get; set; }
-    public List<Endereco> Enderecos { get; set; } 
+    public List<Endereco> Enderecos { get; set; } = new ();
     [JsonIgnore]
     public string? PasswordHash { get; set; }
-
-    public Cliente()
-    {
-        Enderecos = new List<Endereco>();
-    }
 }

@@ -17,10 +17,4 @@
       <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Update="Models\Endereco.cs">
-        <DependentUpon>Cliente.cs</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
 </Project>

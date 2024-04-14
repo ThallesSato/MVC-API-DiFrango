@@ -62,7 +62,13 @@ namespace mvc_api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Bairro")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Cep")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Cidade")
                         .HasColumnType("longtext");
 
                     b.Property<int?>("ClienteId")

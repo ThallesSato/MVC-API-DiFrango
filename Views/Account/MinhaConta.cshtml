@@ -13,34 +13,24 @@
     @Html.LabelFor(m => m.FullName,"Nome Completo", new { @class = "control-label" })
     @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })<br/>
     
-    @Html.LabelFor(m => m.Enderecos,"Endereços", new { @class = "control-label" })<br/>
+    @Html.LabelFor(m => m.Enderecos,"Endereços", new { @class = "control-label" })<br/><br/>
     @if (Model.Enderecos.Count == 0)
     {
         <span> Você ainda não possui endereços cadastrados! </span><br/><br/>
     }
     else
     {
-        foreach(Endereco endereco in Model.Enderecos)
+        foreach(var endereco in Model.Enderecos)
         {
-            @Html.Label(endereco.Rua,"Rua", new { @class = "control-label" })
-            @Html.TextBox(endereco.Rua, endereco.Rua, new { @class = "form-control" })<br/>
+            <p>Cep: @endereco.Cep Rua: @endereco.Rua Número: @endereco.Numero Complemento: @endereco.Complemento</p>
             
-            @Html.Label(endereco.Numero,"Numero", new { @class = "control-label" })
-            @Html.TextBox(endereco.Numero, endereco.Numero, new { @class = "form-control" })<br/>
-            
-            @Html.Label(endereco.Complemento,"Complemento", new { @class = "control-label" })
-            @Html.TextBox(endereco.Complemento, endereco.Complemento, new { @class = "form-control" })<br/>
-            
-            @Html.Label(endereco.Cep,"Cep", new { @class = "control-label" })
-            @Html.TextBox(endereco.Cep, endereco.Cep, new { @class = "form-control" })<br/>
-            
-            <form asp-controller="Account" asp-action="Endereco">
+            <form asp-controller="Account" asp-action="Endereco" method="get">
                 <input type="hidden" name="enderecoId" value="@endereco.Id" />
                 <button type="submit" class="btn btn-primary">Editar</button>
             </form>
         }
     }
-    <form asp-controller="Account" asp-action="Endereco">
+    <form asp-controller="Account" asp-action="Endereco" method="get">
         <button type="submit" class="btn btn-primary">Novo Endereço</button>
     </form>
 </div>
