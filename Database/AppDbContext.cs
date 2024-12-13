@@ -14,17 +14,17 @@ public class AppDbContext : DbContext
     public DbSet<Pedido> Pedidos { get; set; }
     public DbSet<Produto> Produtos { get; set; }
     public DbSet<ProdutoPedido> ProdutosPedidos { get; set; }
-    
-    protected override void OnModelCreating(ModelBuilder builder)
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        builder.Entity<Cliente>(e =>
+        modelBuilder.Entity<Cliente>(e =>
         {
-            e.HasIndex(e => e.Telefone).IsUnique();
+            e.HasIndex(pp => pp.Telefone).IsUnique();
         });
         
-        builder.Entity<ProdutoPedido>(e =>
+        modelBuilder.Entity<ProdutoPedido>(e =>
         {
-            e.HasKey(e => new { e.ProdutoId, e.PedidoId });
+            e.HasKey(pp => new { pp.ProdutoId, pp.PedidoId });
         });
     }
 }

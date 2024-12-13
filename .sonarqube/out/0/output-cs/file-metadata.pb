@@ -1,0 +1,30 @@
+c
+XC:\Users\p-tsato\Downloads\Pessoal\MVC-API\obj\Debug\net8.0\mvc-api.RazorAssemblyInfo.csutf-8^
+SC:\Users\p-tsato\Downloads\Pessoal\MVC-API\obj\Debug\net8.0\mvc-api.AssemblyInfo.csutf-8u
+jC:\Users\p-tsato\Downloads\Pessoal\MVC-API\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.csutf-8`
+UC:\Users\p-tsato\Downloads\Pessoal\MVC-API\obj\Debug\net8.0\mvc-api.GlobalUsings.g.csutf-8X
+OC:\Users\p-tsato\Downloads\Pessoal\MVC-API\ViewModel\Login\RegisterViewModel.csutf-8U
+LC:\Users\p-tsato\Downloads\Pessoal\MVC-API\ViewModel\Login\LoginViewModel.csutf-8T
+KC:\Users\p-tsato\Downloads\Pessoal\MVC-API\ViewModel\Login\AuthViewModel.csutf-8O
+FC:\Users\p-tsato\Downloads\Pessoal\MVC-API\ViewModel\ErrorViewModel.csutf-8Z
+QC:\Users\p-tsato\Downloads\Pessoal\MVC-API\ViewModel\Account\EnderecoViewModel.csutf-8Y
+PC:\Users\p-tsato\Downloads\Pessoal\MVC-API\ViewModel\Account\ClienteViewModel.csutf-8]
+TC:\Users\p-tsato\Downloads\Pessoal\MVC-API\ViewModel\Account\EditClienteViewModel.csutf-8>
+5C:\Users\p-tsato\Downloads\Pessoal\MVC-API\Program.csutf-8K
+BC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Models\ProdutoPedido.csutf-8E
+<C:\Users\p-tsato\Downloads\Pessoal\MVC-API\Models\Produto.csutf-8D
+;C:\Users\p-tsato\Downloads\Pessoal\MVC-API\Models\Pedido.csutf-8F
+=C:\Users\p-tsato\Downloads\Pessoal\MVC-API\Models\Endereco.csutf-8E
+<C:\Users\p-tsato\Downloads\Pessoal\MVC-API\Models\Cliente.csutf-8G
+>C:\Users\p-tsato\Downloads\Pessoal\MVC-API\Models\Categoria.csutf-8]
+RC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Migrations\AppDbContextModelSnapshot.csutf-8b
+WC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Migrations\20240415140418_sqlite.Designer.csutf-8W
+NC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Migrations\20240415140418_sqlite.csutf-8h
+]C:\Users\p-tsato\Downloads\Pessoal\MVC-API\Migrations\20240326020938_Endereco add.Designer.csutf-8]
+TC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Migrations\20240326020938_Endereco add.csutf-8c
+XC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Migrations\20240306225717_Initial.Designer.csutf-8X
+OC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Migrations\20240306225717_Initial.csutf-8L
+CC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Database\AppDbContext.csutf-8R
+IC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Controllers\LoginController.csutf-8Q
+HC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Controllers\HomeController.csutf-8T
+KC:\Users\p-tsato\Downloads\Pessoal\MVC-API\Controllers\AccountController.csutf-8

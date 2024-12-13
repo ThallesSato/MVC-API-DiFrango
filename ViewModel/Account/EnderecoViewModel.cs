@@ -7,13 +7,14 @@ public class EnderecoViewModel
 {
     public int Id { get; set; }
     [Required(ErrorMessage = "Rua é obrigatório")]
-    public string Rua { get; set; }
+    public string Rua { get; set; } = String.Empty;
     public string? Numero { get; set; }
     public string? Complemento { get; set; }
-    public string? Bairro { get; set; }
-    public string? Cidade { get; set; }
+    public string Bairro { get; set; } = String.Empty;
+    public string Cidade { get; set; } = String.Empty;
     [Required(ErrorMessage = "Cep é obrigatório")]
-    public string? Cep { get; set; }
+
+    public string Cep { get; set; } = String.Empty;
     
     public static EnderecoViewModel FromEndereco(Endereco endereco)
     {

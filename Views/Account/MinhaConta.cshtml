@@ -8,11 +8,15 @@
 
 <div class="form-group">
     @Html.LabelFor(m => m.Telefone, new { @class = "control-label" })
-    @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })<br/>
+    @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control", @readonly = "readonly" })<br/>
     
     @Html.LabelFor(m => m.FullName,"Nome Completo", new { @class = "control-label" })
-    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })<br/>
+    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @readonly = "readonly" })<br/>
     
+    <form asp-controller="Account" asp-action="EditarConta" method="get">
+        <button type="submit" class="btn btn-primary">Editar Conta</button>
+    </form>
+    <br/>
     @Html.LabelFor(m => m.Enderecos,"Endereços", new { @class = "control-label" })<br/><br/>
     @if (Model.Enderecos.Count == 0)
     {
@@ -30,6 +34,7 @@
             </form>
         }
     }
+    <br/>
     <form asp-controller="Account" asp-action="Endereco" method="get">
         <button type="submit" class="btn btn-primary">Novo Endereço</button>
     </form>

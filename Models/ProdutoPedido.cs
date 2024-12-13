@@ -8,8 +8,8 @@ public class ProdutoPedido
     public int PedidoId { get; set; }
     [JsonIgnore]
     public int ProdutoId { get; set; }
-    [JsonIgnore]
-    public Pedido Pedido { get; set; }
-    public Produto Produto { get; set; }
+    [JsonIgnore] 
+    public Pedido Pedido { get; set; } = new();
+    public Produto Produto { get; set; } = new ();
     public float Quantidade{ get; set; }
 }

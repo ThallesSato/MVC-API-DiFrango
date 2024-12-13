@@ -21,7 +21,7 @@ public class LoginController : Controller
     public IActionResult Auth()
     {
         // Se o usuário estiver logado, redireciona para a página inicial
-        if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home");
+        if (User.Identity is { IsAuthenticated: true }) return RedirectToAction("Index", "Home");
         return View();
     }
     
@@ -51,8 +51,9 @@ public class LoginController : Controller
     [HttpGet]
     public IActionResult Register()
     {
+
         // Se autenticado, redireciona para a página inicial
-        if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home");
+        if (User.Identity is { IsAuthenticated: true }) return RedirectToAction("Index", "Home");
         
         // Se o telefone não estiver no TempData, redireciona para tela de autenticação (telefone)
         if (!TempData.ContainsKey("Telefone")) return RedirectToAction("Auth", "Login");
@@ -61,7 +62,7 @@ public class LoginController : Controller
         RegisterViewModel register = new RegisterViewModel();
         
         // Atribui o Telefone na model
-        register.Telefone = TempData["Telefone"].ToString();
+        register.Telefone = TempData?["Telefone"]?.ToString() ?? "";
         return View(register);
     }
 
@@ -107,8 +108,8 @@ public class LoginController : Controller
         LoginViewModel login = new LoginViewModel();
         
         // Resgata os dados do TempData e insere na model
-        login.Telefone = TempData["Telefone"].ToString();
-        login.Nome = TempData["Nome"].ToString();
+        login.Telefone = TempData?["Telefone"]?.ToString();
+        login.Nome = TempData?["Nome"]?.ToString();
         
         return View(login);
     }
@@ -123,7 +124,7 @@ public class LoginController : Controller
         {
             // Busca cliente no BD pelo telefone
             var cliente = _context.Clientes
-                .FirstOrDefault(c => c.Telefone == model.Telefone);
+                .First(c => c.Telefone == model.Telefone);
 
             // Se senha invalida ...
             if (!BCrypt.Net.BCrypt.Verify(model.Password, cliente.PasswordHash)) // Compara a senha informada com a senha encriptada

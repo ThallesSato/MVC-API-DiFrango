@@ -5,8 +5,9 @@ using mvc_api.Database;
 var builder = WebApplication.CreateBuilder(args);
 
 //Connection string
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContext>(o => o.UseMySQL(connectionString));
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")??"";
+//builder.Services.AddDbContext<AppDbContext>(o => o.UseMySQL(connectionString));
+builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlite("Data Source=mydatabase.db"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
